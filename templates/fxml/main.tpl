@@ -7,7 +7,7 @@
 		</site>
 		<menu>
 			<background>none #585858</background>
-			<color>#a8a8a8</color>
+			<color>#f3f3f3</color>
 		</menu>
 		<infoList>
 			<background>none #363636</background>
@@ -29,6 +29,7 @@
 		</parent>
 	</channels>	
 </style>
+<allvast><![CDATA[http://xml.forkplayer.tv/?do=/plugin&id=advert&mode=vast]]></allvast>
 {include file="engine/modules/fxml.php?fx=title"}
 {include file="engine/modules/fxml.php?fx=menu"}
 [aviable=main][page-count=1] {include file="engine/modules/fxml.php?fx=mainpage"} [/page-count][/aviable]

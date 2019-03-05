@@ -1,6 +1,10 @@
 <?php
+// FXML DLE wiki.forkplayer.tv https://github.com/alexkdpu/DLE_FXML
+
+
+if(empty($_SERVER["REQUEST_SCHEME"])) if($_SERVER["SERVER_PORT"]==443) $_SERVER["REQUEST_SCHEME"]="https"; else $_SERVER["REQUEST_SCHEME"]="http";
 $siteurl = "$_SERVER[REQUEST_SCHEME]://$_SERVER[HTTP_HOST]";
-// FXML DLE wiki.forkplayer.tv
+
 if(!function_exists("ChArrToXML")) {
 	function ChArrToXML($ChArr,$tag="channel"){
 		$res="";
@@ -75,7 +79,6 @@ if($fx=="mainpage"){
 		set_vars("category", $cat_info);
 		$db->free();
 	}
-	//print_r($cat_info);	
 	$sub=[];
 	foreach($cat_info as $k=>$v){
 		$sub[]=["logo_30x30"=>$v["icon"],"title"=>$v["name"],"playlist_url"=>"$siteurl/index.php?do=cat&category=$v[alt_name]"];
@@ -101,10 +104,6 @@ if($fx=="menu"){
 	$_MENU[]=["title"=>"Поиск","search_on"=>"Введите поисковый запрос","playlist_url"=>"$siteurl/index.php?do=search#POSTdo=search&subaction=search&search_start=0&full_search=0&result_from=1&story={search}"];
 
 	$_MENU[]=["title"=>"Правообладателям","playlist_url"=>"$siteurl/index.php?do=static&page=copyrights"];
-	//print_r($GLOBALS);	
-	$np=explode("<span>", $GLOBALS["tpl"]->data["{pages}"]);
-	$next_p=$np[count($np)-1];
-	preg_match_all("/href=\"(.*?)\".*?>(.*?)</",$next_p,$arr);
 	for($i=0;$i<count($_MENU);$i++){		
 		echo ChArrToXML($_MENU[$i],"menu");
 
