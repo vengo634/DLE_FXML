@@ -82,13 +82,14 @@ if($fx=="navigation"){
 $_MENU=[];
 if($fx=="title"){
 	if(!empty($_POST["story"])) $ttl="Поиск по сайту \"".$_POST["story"]."\"";
+	elseif(strpos($_SERVER["QUERY_STRING"],"box_mac=")===0) $ttl=$config["home_title"];
 	else $ttl="";
 	if($ttl!=""){
 		echo "\n<title><![CD"."ATA[$ttl]"."]></title>";
 		echo "\n<navigate><![CD"."ATA[$config[home_title] &raquo; $ttl]"."]></navigate>";
 	}
 }
-if($fx=="mainpage"){		
+if($fx=="mainpage"){
 	$cat_info = get_vars("category");
 	$_CH=[];
 	$_CH[]=["title"=>"Поиск","search_on"=>"Введите поисковый запрос","playlist_url"=>"$siteurl/index.php?do=search#POSTdo=search&subaction=search&search_start=0&full_search=0&result_from=1&story={search}"];
