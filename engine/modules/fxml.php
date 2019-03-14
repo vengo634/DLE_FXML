@@ -59,6 +59,7 @@ if($fx=="navigation"){
 	$_CH=[];
 	preg_match_all("/href=\"(.*?)\".*?>(.*?)</",$next_p,$arr);
 	for($i=0;$i<count($arr[0]);$i++){
+		$arr[1][$i]=str_replace("&amp;","&",$arr[1][$i]);
 		$ch[]=[$arr[1][$i]."&p=".$arr[2][$i],$arr[2][$i]];
 		if(strpos($arr[2][$i],"http")===0) {
 			$_CH[]=["logo_30x30"=>"hidden","title"=>" &raquo; Страница ".$arr[2][$i],"playlist_url"=>$arr[1][$i]."&p=".$arr[2][$i]];	
