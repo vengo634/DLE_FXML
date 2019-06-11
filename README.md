@@ -1,6 +1,11 @@
 # DLE_FXML
 FXML DLE киносайт для ForkPlayer с балансеров  moonwalk и hdgo. 
-
+Обновление от 12.06.2019
+ - обработка доп.поля playlist с форматом [{"title":"Сезон 1","folder":[{"title":"Серія 1","file":"http"},{"title":"Серія 2","file":"http"}]]
+ - автоматическая вставка изображений из short_story если доп. поле poster пустое или отсутствует
+ - переход на следующую страницу поиска
+ - кнопки меню Добавить портал в Глоб. поиск и закладки
+ 
 Установка на DLE версии 13 и выше
 
 Скачайте архив https://github.com/alexkdpu/DLE_FXML/blob/master/DLE_FXML-plugin.zip.
