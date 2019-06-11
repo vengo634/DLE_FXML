@@ -1,5 +1,6 @@
 # DLE_FXML
 FXML DLE киносайт для ForkPlayer с балансеров  moonwalk и hdgo. 
+
 Обновление от 12.06.2019
  - обработка доп.поля playlist с форматом [{"title":"Сезон 1","folder":[{"title":"Серія 1","file":"http"},{"title":"Серія 2","file":"http"}]]
  - автоматическая вставка изображений из short_story если доп. поле poster пустое или отсутствует
