@@ -3,7 +3,7 @@
 
 //Start Your Settings
 $fxmlLogo="http://wiki.forkplayer.tv/w/images/b/bb/Emptydoc.png";  // Небольшой логотип сайта (~64px)
-
+$siteurl=""; //Адрес сайта (без / в конце)
 //End Your settings
 
 
@@ -50,7 +50,7 @@ if (!function_exists('json_last_error_msg')) {
             return isset($ERRORS[$error]) ? $ERRORS[$error] : 'Unknown error';
         }
     }
-$siteurl = (is_https()?"https":"http")."://$_SERVER[HTTP_HOST]"; 
+if(empty($siteurl)) $siteurl = (is_https()?"https":"http")."://$_SERVER[HTTP_HOST]"; 
 
 if(!function_exists("ChArrToXML")) {
 	function ChArrToXML($ChArr,$tag="channel"){
