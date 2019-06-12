@@ -53,6 +53,8 @@ if (!function_exists('json_last_error_msg')) {
     }
 if(empty($siteurl)) $siteurl = (is_https()?"https":"http")."://$_SERVER[HTTP_HOST]"; 
 
+$GLOBALS["tpl"]->set('{current_page}', $siteurl);
+
 if(!function_exists("ChArrToXML")) {
 	function ChArrToXML($ChArr,$tag="channel"){
 		$res="";
@@ -109,6 +111,7 @@ if(!function_exists("getPoster")) {
 		return $poster;
 	}
 }
+if($fx=="page_url") echo $siteurl.$_SERVER["PHP_SELF"];
 if($fx=="icon") echo $fxmlLogo;
 if($fx=="poster"){
 	if(strpos($image,"/")===0||strpos($image,"{")===0) $image="{$siteurl}$image";

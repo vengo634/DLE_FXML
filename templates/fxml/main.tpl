@@ -5,11 +5,11 @@
 		<site>
 			<background><![CDATA[url(http://wiki.forkplayer.tv/w/images/8/80/Spiderman.jpg)]]></background>
 			<before><![CDATA[
-				<div style='position:absolute;top:86%;left:91%;z-index:1;'>
-				<img border="0" src="http://www.warlog.ru/counter/?i=3003" alt="счетчик посещений" title="счетчик посещений" />
+				<div style='position:absolute;top:86%;left:91%;z-index:1;\'>
+				<iframe style='border-width: 0px;' src='javascript:document.write(&quot;<img src=\"https://counter.yadro.ru/hit?t50.7;r&quot;+escape(&quot;&quot;)+((typeof(screen)==&quot;undefined&quot;)?&quot;&quot;:&quot;;s&quot;+screen.width+&quot;*&quot;+screen.height+&quot;*&quot;+(screen.colorDepth?screen.colorDepth:screen.pixelDepth))+&quot;;u&quot;+escape(&quot;{include file="engine/modules/fxml.php?fx=page_url"}&quot;)+&quot;;&quot;+Math.random()+&quot;\" alt=\"\" title=\"LiveInternet\" &quot;+&quot;border=\"0\" width=\"31\" height=\"31\">&quot;)'></iframe>
 				</div>
-			]]>
-			</before>
+			]]> 
+			</before>			 
 		</site>
 		<menu>
 			<background>none #585858</background>
