@@ -19,20 +19,21 @@ if ( ! function_exists('is_https'))
      */
     function is_https()
     {
-        if ( ! empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
+        if ( ! empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off' )
         {
-            return TRUE;
+            return true;
         }
+		else if(intval($_SERVER['SERVER_PORT']) == 443||strtolower($_SERVER['HTTP_X_FORWARDED_SSL']) == 'on') return true; 
         elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https')
         {
-            return TRUE;
+            return true;
         }
         elseif ( ! empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) !== 'off')
         {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }
 if (!function_exists('json_last_error_msg')) {
