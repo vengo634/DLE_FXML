@@ -3,7 +3,9 @@
 
 //Start Your Settings
 $fxmlLogo="http://wiki.forkplayer.tv/w/images/b/bb/Emptydoc.png";  // Небольшой логотип сайта (~64px)
-$siteurl=""; //Адрес сайта (без / в конце)
+$iframePlayers="tortuga|directlink"; // Имена доп. полей (через |) в которых ссылки на плееры (например:https://ashdi.vip/vod/251)  или прямые ссылки на видео (например: https://ashdi.vip/content/stream/films/dusha_kompan_251/hls/index.m3u8)
+$poster="poster"; //Имя доп. поля с ссылкой на изображение
+
 //End Your settings
 
 
@@ -19,21 +21,20 @@ if ( ! function_exists('is_https'))
      */
     function is_https()
     {
-        if ( ! empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off' )
+        if ( ! empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
         {
-            return true;
+            return TRUE;
         }
-		else if(intval($_SERVER['SERVER_PORT']) == 443||strtolower($_SERVER['HTTP_X_FORWARDED_SSL']) == 'on') return true; 
         elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https')
         {
-            return true;
+            return TRUE;
         }
         elseif ( ! empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) !== 'off')
         {
-            return true;
+            return TRUE;
         }
 
-        return false;
+        return FALSE;
     }
 }
 if (!function_exists('json_last_error_msg')) {
@@ -51,9 +52,7 @@ if (!function_exists('json_last_error_msg')) {
             return isset($ERRORS[$error]) ? $ERRORS[$error] : 'Unknown error';
         }
     }
-if(empty($siteurl)) $siteurl = (is_https()?"https":"http")."://$_SERVER[HTTP_HOST]"; 
-
-$GLOBALS["tpl"]->set('{current_page}', $siteurl);
+$siteurl = (is_https()?"https":"http")."://$_SERVER[HTTP_HOST]"; 
 
 if(!function_exists("ChArrToXML")) {
 	function ChArrToXML($ChArr,$tag="channel"){
@@ -98,7 +97,7 @@ if(!function_exists("getPoster")) {
 		if(strpos($poster,"http")===0) return $poster;
 		if(strpos($image,"http")===0) return $image;
 		//exit;
-		$poster=$GLOBALS["tpl"]->data["[xfvalue_poster]"];
+		$poster=$GLOBALS["tpl"]->data["[xfvalue_$poster]"];
 		if(empty($poster)){
 			$poster=$GLOBALS["images"][0];
 		}
@@ -111,8 +110,48 @@ if(!function_exists("getPoster")) {
 		return $poster;
 	}
 }
-if($fx=="page_url") echo $siteurl.$_SERVER["PHP_SELF"];
 if($fx=="icon") echo $fxmlLogo;
+
+if($fx=="players"){	
+	if(strpos($image,"/")===0||strpos($image,"{")===0) $image="{$siteurl}$image";
+	if(strpos($poster,"/")===0||strpos($poster,"{")===0) $poster="{$siteurl}$poster";
+	$logo=getPoster($image,$poster);
+	
+	foreach(explode("|",$iframePlayers) as $k=>$v){
+		if(!empty($GLOBALS["tpl"]->data["[xfvalue_$v]"])){
+			print "<channel>
+				<logo_30x30><![CDATA[$logo]]></logo_30x30>
+				<menu_url>$v</menu_url>
+				<stream_url><![CDATA[".$GLOBALS["tpl"]->data["[xfvalue_$v]"]."]]></stream_url>
+				<title><![CDATA[".$GLOBALS["tpl"]->data["{title}"]." - $v]]></title>
+				<description><![CDATA[
+						<style> 
+				a{
+				color:inherit;
+				}
+				</style> 
+				".$GLOBALS["tpl"]->data["{full-story}"]."				
+
+			]]></description>
+			</channel>";
+		}
+		//print "alldops";
+		//print_r($GLOBALS["tpl"]);
+	}
+}
+if($fx=="counterhits"){
+	$row = $db->super_query("SELECT * FROM " . PREFIX . "_logs WHERE member='".date("Ymd")."'");
+	if(empty($row["ip"])) {
+		$row["ip"]=1;
+		$db->query("insert into " . PREFIX . "_logs set news_id='0', member='".date("Ymd")."',ip='1',rating='0'");
+		print mysql_error();
+	}
+	else {
+		$row["ip"]++;
+		$db->super_query("update " . PREFIX . "_logs set ip='$row[ip]' WHERE member='".date("Ymd")."'");
+	}
+	echo $row["ip"];
+}
 if($fx=="poster"){
 	if(strpos($image,"/")===0||strpos($image,"{")===0) $image="{$siteurl}$image";
 	if(strpos($poster,"/")===0||strpos($poster,"{")===0) $poster="{$siteurl}$poster";

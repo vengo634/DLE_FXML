@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dleplugin>
 	<name>FXML DLE для киносайтов</name>
-	<description>FXML DLE киносайт для ForkPlayer. Каждая запись должна содержать дополнительные поля с видео moonwalk или hdgo</description>
+	<description>FXML DLE киносайт для ForkPlayer. 
+	Каждая запись должна иметь доп. поля (tortuga, directlink) в которых ссылки на плееры или прямые ссылки на видео. Настройка списка полей находится в файле engine/modules/fxml.php
+	</description>
 	<icon></icon>
-	<version>1.0</version>
+	<version>1.1</version>
 	<dleversion>13</dleversion>
 	<versioncompare>greater</versioncompare>
 	<upgradeurl></upgradeurl>
