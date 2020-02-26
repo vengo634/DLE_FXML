@@ -107,6 +107,7 @@ if(!function_exists("getPoster")) {
 		}
 		if($poster=="[xfvalue_poster]") $poster="";
 		if(empty($poster)) $poster="none";
+		if(strpos($poster,"/")===0) $poster="{$siteurl}$poster";
 		return $poster;
 	}
 }
